@@ -1,0 +1,16 @@
+import json
+
+def lambda_handler(event, context):
+    # The 'event' variable contains all the information about the trigger.
+    # We parse it to get the bucket name and the file name (key).
+    
+    bucket = event['Records'][0]['s3']['bucket']['name']
+    key = event['Records'][0]['s3']['object']['key']
+    
+    # We use a simple print() statement. In Lambda, this prints to the logs.
+    print(f"Success! A file named '{key}' was uploaded to the S3 bucket '{bucket}'.")
+    
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Log generated successfully!')
+    }
